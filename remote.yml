@@ -1,0 +1,20 @@
+---
+- hosts: test
+  tasks: 
+  - name: create user1
+    user:
+      name: user1
+      groups: wheel
+      append: yes
+
+  - name: creating a directory
+    file:
+      path: /home/user1/.ssh/
+      state: directory
+
+  - name: copying an ssh-key
+    copy: 
+      src: /home/nursultan/.ssh/authorized_keys
+      dest: /home/user1/.ssh/id_rsa.pub
+      remote_src: yes
+
